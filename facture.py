@@ -3,21 +3,22 @@ location=[300,390]
 unite=[92,293]
 def afficherfacture(nom):
     print("  ==========  " ,nom,  "  ==========  ","\n")
-    print("consommation:",nindex,"-",aindex,"=",consommation,"\n")
-    print("montant ht:",consommation,"x",unite[choixfacture],"=",montantht,"\n")
-    print("tva:",montantht,"x","0.1925","=",tva,"\n")
-    print("location compteur:",location[choixfacture],"\n")
-    print("total:",montantht,"+",tva,"+",location[choixfacture],"=",total,"\n")
+    print("consommation:",nindex,"-",aindex,"=",consommation,"\n",sep="\t")
+    print("montant ht:",consommation,"x",unite[choixfacture],"=",montantht,"\n",sep="\t")
+    print("taxe ajouté:",montantht,"x","0.1925","=",tva,"\n" ,sep="\t")
+    print("location :",location[choixfacture],"\n",sep="\t")
+    print("total à payé:",montantht,"+",tva,"+",location[choixfacture],"=",total,"\n",sep="\t")
 
 def calculerfacture(aindex,nindex,unite,location,nom):
     global consommation
     consommation=nindex-aindex
+    consommation=round(consommation,2)
     global montantht
     montantht=consommation*unite
+    montantht=round(montantht,2)
     global tva 
     tva=montantht*0.1925
-    if tva%1!=0:
-        tva=(tva//1)+1
+    tva=round(tva,2)
     global total 
     total=montantht+tva+location
     if total%25!=0:
